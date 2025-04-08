@@ -43,13 +43,7 @@ jobs:
           images: ghcr.io/${{ github.repository }}
           tags: ${{ github.event.inputs.name }} 
 
-      - name: Run Trivy vulnerability scanner
-        uses: aquasecurity/trivy-action@master
-        with:
-          image-ref: ${{ steps.meta.outputs.tags }}  # 도커 이미지 태그
-          format: table
-          severity: CRITICAL,HIGH
-          exit-code: 1 
+
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v2
@@ -64,5 +58,12 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          
+
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: ${{ steps.meta.outputs.tags }}  # 도커 이미지 태그
+          format: table
+          severity: CRITICAL,HIGH
+          exit-code: 1 
       
