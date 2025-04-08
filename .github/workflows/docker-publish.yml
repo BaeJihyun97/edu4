@@ -5,12 +5,12 @@
 
 name: Publish Docker Github Package
 
-# on:
-#   release:
-#     types: [published]
-
 on:
-  workflow_dispatch:  # ✅ 수동 실행 허용
+  release:
+    types: [published]
+
+# on:
+#   workflow_dispatch:  # ✅ 수동 실행 허용
 
 jobs:
   push_to_registries:
@@ -50,3 +50,4 @@ jobs:
           image-ref: ${{ steps.meta.outputs.tags }}  # 도커 이미지 태그
           format: table
           severity: CRITICAL,HIGH
+          exit-code: 1 
