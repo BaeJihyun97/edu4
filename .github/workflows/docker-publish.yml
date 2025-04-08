@@ -5,9 +5,12 @@
 
 name: Publish Docker Github Package
 
+# on:
+#   release:
+#     types: [published]
+
 on:
-  release:
-    types: [published]
+  workflow_dispatch:  # ✅ 수동 실행 허용
 
 jobs:
   push_to_registries:
